@@ -1,14 +1,15 @@
 #!/bin/bash
 
-'
-Script criado para instalar programas após formatar a máquina, caso seja preguiçoso como eu e decida usar este auto-install, saiba que ele irá fazer as seguintes alterações no seu Ubuntu:
+<<SOBRE
+Script criado para instalar programas após formatar a máquina, 
+caso seja preguiçoso como eu e decida usar este auto-install, 
+saiba que ele irá fazer as seguintes alterações no seu Ubuntu:
 
 - Irá destravar o apt, ou seja, irá permitir que o apt seja usado simultaneamente por mais de um processo, permitindo que seja instalado mais de um programa ao mesmo tempo.
 
 - 
 
-
-'
+SOBRE
 
 
 echo -e "\nTirando a trava do apt..."
