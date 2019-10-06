@@ -13,6 +13,8 @@ saiba que ele irá fazer as seguintes alterações no seu Ubuntu:
 
 - Irá instalar o Skype;
 
+- Irá instalar o Google Chrome;
+
 SOBRE
 
 
@@ -43,6 +45,10 @@ echo -e "OK!\n"
 
 
 
+
+
+
+
 echo -e "\nInstalando curl..."
 if ! apt install curl -y
 then
@@ -50,6 +56,12 @@ then
     exit 1
 fi
 echo -e "OK!\n"
+
+
+
+
+
+
 
 
 
@@ -96,4 +108,32 @@ echo -e "OK!\n"
 
 
 
-echo -e "Foram instalados:\n\n- Curl;\n- Visual Studio Code;\n- Skype;\n"
+
+
+
+echo -e "\nInstalando Google Chrome...\nBaixando a key e adicionando a source list..."
+
+if ! wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+then
+    echo -e "\nNão foi possivel fazer o Download e adiocionar a key\n"
+    exit 1
+fi
+if !  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+then
+    echo -e "\nNão foi possivel adicionar o chrome a source list\n"
+    exit 1
+fi
+echo -e "\nAtualizando repositórios e instalando o Chrome..."
+if ! sudo apt-get update ; sudo apt-get install google-chrome-stable -y
+then
+    echo -e "\nNão foi possivel instalar o Google Chrome!\n"
+    exit 1
+fi
+echo -e "OK!\n"
+
+
+
+
+
+
+echo -e "Foram instalados:\n\n- Curl;\n- Visual Studio Code;\n- Skype;\n- Google Chrome\n"
