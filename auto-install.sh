@@ -15,6 +15,8 @@ saiba que ele irá fazer as seguintes alterações no seu Ubuntu:
 
 - Irá instalar o Google Chrome;
 
+- Irá instalar o Gnome Extensions;
+
 SOBRE
 
 
@@ -124,7 +126,7 @@ then
     exit 1
 fi
 echo -e "\nAtualizando repositórios e instalando o Chrome..."
-if ! sudo apt-get update ; sudo apt-get install google-chrome-stable -y
+if ! sudo apt-get update && sudo apt-get install google-chrome-stable -y
 then
     echo -e "\nNão foi possivel instalar o Google Chrome!\n"
     exit 1
@@ -134,6 +136,21 @@ echo -e "OK!\n"
 
 
 
+echo -e "\nInstalando Gnome Extensions...\n"
+if ! sudo apt-get install chrome-gnome-shell
+then
+    echo -e "\nNão foi possivel instalar o Gnome Extensions!\n"
+    exit 1
+fi
+echo -e "OK!\n"
 
 
-echo -e "Foram instalados:\n\n- Curl;\n- Visual Studio Code;\n- Skype;\n- Google Chrome\n"
+
+
+
+
+
+
+
+
+echo -e "Foram instalados:\n\n- Curl;\n- Visual Studio Code;\n- Skype;\n- Google Chrome;\n-Gnome Extensions\n"
