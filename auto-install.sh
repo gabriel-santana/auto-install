@@ -6,7 +6,7 @@ saiba que ele irá fazer as seguintes alterações no seu Ubuntu:
 
 - Irá destravar o apt, ou seja, irá permitir que o apt seja usado simultaneamente por mais de um processo, permitindo que seja instalado mais de um programa ao mesmo tempo;
 
-- Irá instalar o Curl, Visual Studio Code, Gnome Extensions, Zsh, Insomnia, Spotify, Dbeaver, Flameshot, Vlc, LibreOffice, Git;
+- Irá instalar o Curl, Visual Studio Code, Gnome Extensions, Zsh, Insomnia, Spotify, Dbeaver, Flameshot, Vlc, LibreOffice, Git, Docker, Discord;
 
 SOBRE
 
