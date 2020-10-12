@@ -83,7 +83,7 @@ sudo snap install insomnia
 sudo snap install dbeaver-ce
 sudo snap install spotify
 sudo snap install flameshot
-
+sudo snap install discord
 
 
 
