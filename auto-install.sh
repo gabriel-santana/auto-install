@@ -6,15 +6,7 @@ saiba que ele irá fazer as seguintes alterações no seu Ubuntu:
 
 - Irá destravar o apt, ou seja, irá permitir que o apt seja usado simultaneamente por mais de um processo, permitindo que seja instalado mais de um programa ao mesmo tempo;
 
-- Irá instalar o curl;
-
-- Irá instalar o Visual Studio Code;
-
-- Irá instalar o Skype;
-
-- Irá instalar o Google Chrome;
-
-- Irá instalar o Gnome Extensions;
+- Irá instalar o Curl, Visual Studio Code, Gnome Extensions, Zsh, Insomnia, Spotify, Dbeaver, Flameshot, Vlc, LibreOffice, Git;
 
 SOBRE
 
@@ -49,99 +41,31 @@ echo -e "OK!\n"
 
 
 
+sudo apt-get remove docker docker-engine docker.io containerd runc
 
-echo -e "\nInstalando curl..."
-if ! apt install curl -y
-then
-    echo -e "\nNão foi possivel instalar curl\n"
-    exit 1
-fi
-echo -e "OK!\n"
+sudo apt-get update -y && sudo apt-get install apt-transport-https curl -y
 
 
+curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
 
+sudo apt-get update -y && sudo apt-get install vlc libreoffice chrome-gnome-shell git zsh ca-certificates gnupg-agent software-properties-common brave-browser -y
 
 
 
 
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-echo -e "\nCriando Source List...[Visual Studio Code]"
-if ! sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-then
-    echo -e "\nNão foi possivel criar o arquivo\n"
-    exit 1
-fi
-echo -e "OK!\n"
+sudo apt-key fingerprint 0EBFCD88
 
-
-echo -e "\nBaixando gpg...[Visual Studio Code]"
-if ! curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-then
-    echo -e "\nNão foi possivel baixar o arquivo\n"
-    exit 1
-fi
-sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-echo -e "OK!\n"
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
 
 
-echo -e "\nInstalando Visual Studio Code..."
-if ! sudo apt update 
-then
-    echo -e "\nNão foi possivel rodar apt update\n"
-    exit 1
-fi
-if !  sudo apt install code
-then
-    echo -e "\nNão foi possivel instalar o Visual Studio Code\n"
-    exit 1
-fi
-echo -e "OK!\n"
-
-echo -e "\nInstalando Skype..."
-if ! wget https://go.skype.com/skypeforlinux-64.deb
-then
-    echo -e "\nNão foi possivel instalar o Visual Studio Code\n"
-    exit 1
-fi
-sudo apt install ./skypeforlinux-64.deb
-echo -e "OK!\n"
-
-
-
-
-
-
-echo -e "\nInstalando Google Chrome...\nBaixando a key e adicionando a source list..."
-
-if ! wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-then
-    echo -e "\nNão foi possivel fazer o Download e adiocionar a key\n"
-    exit 1
-fi
-if !  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-then
-    echo -e "\nNão foi possivel adicionar o chrome a source list\n"
-    exit 1
-fi
-echo -e "\nAtualizando repositórios e instalando o Chrome..."
-if ! sudo apt-get update && sudo apt-get install google-chrome-stable -y
-then
-    echo -e "\nNão foi possivel instalar o Google Chrome!\n"
-    exit 1
-fi
-echo -e "OK!\n"
-
-
-
-
-echo -e "\nInstalando Gnome Extensions...\n"
-if ! sudo apt-get install chrome-gnome-shell
-then
-    echo -e "\nNão foi possivel instalar o Gnome Extensions!\n"
-    exit 1
-fi
-echo -e "OK!\n"
+sudo apt-get update -y && sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
 
 
@@ -152,4 +76,27 @@ echo -e "OK!\n"
 
 
 
-echo -e "Foram instalados:\n\n- Curl;\n- Visual Studio Code;\n- Skype;\n- Google Chrome;\n-Gnome Extensions\n"
+
+
+sudo snap install code --classic
+sudo snap install insomnia 
+sudo snap install dbeaver-ce
+sudo snap install spotify
+sudo snap install flameshot
+
+
+
+
+
+
+
+echo -e "Finalizando\n"
+
+
+
+git config --global user.name "Gabriel Santana"
+git config --global user.email gabrielsantana77@hotmail.com
+
+sudo usermod -aG docker $USER
+
+newgrp docker 
